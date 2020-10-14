@@ -10,7 +10,7 @@ rm libsodium-1.0.18.tar.gz
 mv libsodium-1.0.18 libsodium
 
 LIBNAME="libsodium.a"
-ARCHS=${ARCHS:-"arm64 x86_64"}
+ARCHS=${ARCHS:-"arm64 x86_64 arm64-simulator"}
 DEVELOPER=$(xcode-select -print-path)
 LIPO=$(xcrun -sdk iphoneos -find lipo)
 #LIPO=lipo
@@ -60,13 +60,13 @@ do
 	    export CFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT} ${OTHER_CFLAGS}"
 	    export LDFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT}"
             ;;
-        arm64)
+        arm64-simulator)
 	    PLATFORM="iPhoneSimulator"
-	    HOST="${ARCH}-apple-darwin"
+	    HOST="arm64-apple-darwin"
 	    export BASEDIR="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
 	    export ISDKROOT="${BASEDIR}/SDKs/${PLATFORM}${SDK}.sdk"
-	    export CFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT} -miphoneos-version-min=${SDK} ${OTHER_CFLAGS}"
-	    export LDFLAGS="-arch ${ARCH}"
+	    export CFLAGS="-arch arm64 -isysroot ${ISDKROOT} ${OTHER_CFLAGS}"
+	    export LDFLAGS="-arch arm64 -isysroot ${ISDKROOT}"
             ;;
         x86_64)
 	    PLATFORM="iPhoneSimulator"
