@@ -10,7 +10,7 @@ rm libsodium-1.0.18.tar.gz
 mv libsodium-1.0.18 libsodium
 
 LIBNAME="libsodium.a"
-ARCHS=${ARCHS:-"armv7 armv7s arm64 x86_64"}
+ARCHS=${ARCHS:-"arm64 x86_64"}
 DEVELOPER=$(xcode-select -print-path)
 LIPO=$(xcrun -sdk iphoneos -find lipo)
 #LIPO=lipo
@@ -52,15 +52,7 @@ do
     mkdir -p ${BUILDARCHDIR}
 
     case ${ARCH} in
-        armv7)
-	    PLATFORM="iPhoneOS"
-	    HOST="${ARCH}-apple-darwin"
-	    export BASEDIR="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
-	    export ISDKROOT="${BASEDIR}/SDKs/${PLATFORM}${SDK}.sdk"
-	    export CFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT} ${OTHER_CFLAGS}"
-	    export LDFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT}"
-            ;;
-        armv7s)
+        arm64)
 	    PLATFORM="iPhoneOS"
 	    HOST="${ARCH}-apple-darwin"
 	    export BASEDIR="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
