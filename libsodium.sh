@@ -29,7 +29,7 @@ SDK=$(xcodebuild -showsdks \
     | grep iphoneos | sort | tail -n 1 | awk '{print substr($NF, 9)}'
     )
 
-OTHER_CFLAGS="-Os -Qunused-arguments"
+OTHER_CFLAGS="-Os -Qunused-arguments -disable-asm-optimizations"
 
 # Cleanup
 if [ -d $BUILDDIR ]
@@ -58,7 +58,7 @@ do
 	    export BASEDIR="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
 	    export ISDKROOT="${BASEDIR}/SDKs/${PLATFORM}${SDK}.sdk"
 	    export CFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT} ${OTHER_CFLAGS}"
-	    export LDFLAGS="-mthumb -arch ${ARCH} -isysroot ${ISDKROOT}"
+	    export LDFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT}"
             ;;
         armv7s)
 	    PLATFORM="iPhoneOS"
@@ -66,7 +66,7 @@ do
 	    export BASEDIR="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
 	    export ISDKROOT="${BASEDIR}/SDKs/${PLATFORM}${SDK}.sdk"
 	    export CFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT} ${OTHER_CFLAGS}"
-	    export LDFLAGS="-mthumb -arch ${ARCH} -isysroot ${ISDKROOT}"
+	    export LDFLAGS="-arch ${ARCH} -isysroot ${ISDKROOT}"
             ;;
         arm64)
 	    PLATFORM="iPhoneSimulator"
